@@ -11,7 +11,14 @@ pub fn get_hello() -> &'static str {
 }
 
 pub fn display_text(text: &str) {
-    println!("{}", text);
+    println!("{}, {}", text, f64::EPSILON);
+}
+
+pub fn compare_floats(number_1: &f64, number_2: &f64) -> bool {
+    let difference = number_1 - number_2;
+    let absolute = f64::abs(difference);
+
+    absolute < f64::EPSILON
 }
 
 pub fn create_tuple(x: f64, y: f64, z: f64, w: f64) -> Tuple {
@@ -108,6 +115,26 @@ mod tests {
         assert_eq!(tuple.y, y);
         assert_eq!(tuple.z, z);
         assert_eq!(tuple.w, 0.0);
+    }
+
+    #[test]
+    fn expect_floating_point_numbers_to_be_equal() {
+        let number_1 = 1.0000000000000002220446049250313;
+        let number_2 = 1.0000000000000002220446049250313767857;
+
+        let equal = compare_floats(&number_1, &number_2);
+
+        assert!(equal);
+    }
+
+    #[test]
+    fn expect_floating_point_numbers_to_be_not_equal() {
+        let number_1 = 1.00011;
+        let number_2 = 1.00012;
+
+        let equal = compare_floats(&number_1, &number_2);
+
+        assert!(equal == false);
     }
 
     #[test]
