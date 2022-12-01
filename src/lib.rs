@@ -26,6 +26,23 @@ pub fn create_vector(x: f64, y: f64, z: f64) -> Tuple {
     create_tuple(x, y, z, 0.0)
 }
 
+pub fn tuple_equal(tuple_1: &Tuple, tuple_2: &Tuple) -> bool {
+    if tuple_1.x != tuple_2.x {
+        return false;
+    }
+    if tuple_1.y != tuple_2.y {
+        return false;
+    }
+    if tuple_1.z != tuple_2.z {
+        return false;
+    }
+    if tuple_1.w != tuple_2.w {
+        return false;
+    }
+
+    return true;
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -91,5 +108,25 @@ mod tests {
         assert_eq!(tuple.y, y);
         assert_eq!(tuple.z, z);
         assert_eq!(tuple.w, 0.0);
+    }
+
+    #[test]
+    fn expect_tuples_to_be_equal() {
+        let tuple_1 = create_tuple(4.0, -4.0, 3.0, 1.0);
+        let tuple_2 = create_tuple(4.0, -4.0, 3.0, 1.0);
+
+        let equal = tuple_equal(&tuple_1, &tuple_2);
+
+        assert_eq!(equal, true);
+    }
+
+    #[test]
+    fn expect_tuples_not_to_be_equal() {
+        let tuple_1 = create_tuple(4.0, -4.0, 3.0, 1.0);
+        let tuple_2 = create_tuple(4.0, -4.0, 3.0, 0.0);
+
+        let equal = tuple_equal(&tuple_1, &tuple_2);
+
+        assert_eq!(equal, false);
     }
 }
