@@ -194,10 +194,49 @@ mod tests {
 
     #[test]
     fn expect_to_add_two_points() {
-        let point_one = create_vector(3.0, -2.0, 5.0);
-        let point_two = create_vector(-2.0, 3.0, 1.0);
+        let point_one = create_point(3.0, -2.0, 5.0);
+        let point_two = create_point(-2.0, 3.0, 1.0);
 
         let new_point = add_tuples(&point_one, &point_two);
+
+        assert_eq!(new_point.x, 1.0);
+        assert_eq!(new_point.y, 1.0);
+        assert_eq!(new_point.z, 6.0);
+        assert_eq!(new_point.w, 2.0);
+    }
+
+    #[test]
+    fn expect_to_subtract_point_and_vector() {
+        let point = create_point(3.0, -2.0, 5.0);
+        let vector = create_vector(-2.0, 3.0, 1.0);
+
+        let new_point = subtract_tuples(&point, &vector);
+
+        assert_eq!(new_point.x, 1.0);
+        assert_eq!(new_point.y, 1.0);
+        assert_eq!(new_point.z, 6.0);
+        assert_eq!(new_point.w, 1.0);
+    }
+
+    #[test]
+    fn expect_to_subtract_two_vectors() {
+        let vector_one = create_vector(3.0, -2.0, 5.0);
+        let vector_two = create_vector(-2.0, 3.0, 1.0);
+
+        let new_vector = subtract_tuples(&vector_one, &vector_two);
+
+        assert_eq!(new_vector.x, 1.0);
+        assert_eq!(new_vector.y, 1.0);
+        assert_eq!(new_vector.z, 6.0);
+        assert_eq!(new_vector.w, 0.0);
+    }
+
+    #[test]
+    fn expect_to_subtract_two_points() {
+        let point_one = create_point(3.0, -2.0, 5.0);
+        let point_two = create_point(-2.0, 3.0, 1.0);
+
+        let new_point = subtract_tuples(&point_one, &point_two);
 
         assert_eq!(new_point.x, 1.0);
         assert_eq!(new_point.y, 1.0);
