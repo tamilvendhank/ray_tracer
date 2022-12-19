@@ -252,4 +252,17 @@ mod tests {
         assert_eq!(new_vector.z, -6.0);
         assert_eq!(new_vector.w, 0.0);
     }
+
+    #[test]
+    fn expect_to_subtract_vector_from_zero_vector() {
+        let zero_vector = create_vector(0.0, 0.0, 0.0);
+        let vector = create_vector(1.0, -2.0, 3.0);
+
+        let new_vector = subtract_tuples(&zero_vector, &vector);
+
+        assert_eq!(new_vector.x, -1.0);
+        assert_eq!(new_vector.y, 2.0);
+        assert_eq!(new_vector.z, -3.0);
+        assert_eq!(new_vector.w, 0.0);
+    }
 }
