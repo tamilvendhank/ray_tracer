@@ -68,6 +68,15 @@ pub fn subtract_tuples(tuple_1: &Tuple, tuple_2: &Tuple) -> Tuple {
     }
 }
 
+pub fn negate_tuple(tuple: &Tuple) -> Tuple {
+    Tuple {
+        x: -tuple.x,
+        y: -tuple.y,
+        z: -tuple.z,
+        w: -tuple.w,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -264,5 +273,16 @@ mod tests {
         assert_eq!(new_vector.y, 2.0);
         assert_eq!(new_vector.z, -3.0);
         assert_eq!(new_vector.w, 0.0);
+    }
+
+    #[test]
+    fn expect_to_negate_given_tuple() {
+        let tuple = create_tuple(1.0, -2.0, 3.0, -4.0);
+        let negated_tuple = negate_tuple(&tuple);
+
+        assert_eq!(negated_tuple.x, -1.0);
+        assert_eq!(negated_tuple.y, 2.0);
+        assert_eq!(negated_tuple.z, -3.0);
+        assert_eq!(negated_tuple.w, 4.0);
     }
 }
